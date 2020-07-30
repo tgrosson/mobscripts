@@ -1,0 +1,165 @@
+html {
+	font-family: sans-serif;
+}
+
+a {
+	color: #68adc3;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+h3 {
+	font-family: 'Roboto Slab';
+}
+
+#main-container {
+	margin-left: 20%;
+	margin-right: 20%;
+	flex-direction: column;
+}
+
+#header {
+	text-align: center;
+	font-family: 'Roboto Slab';
+}
+
+#page-description {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+[contenteditable=true] {
+	border: 1px solid gray;
+}
+
+::placeholder {
+	font-style: italic;
+}
+
+div.flex {
+	display: flex;
+}
+
+[type=button],[type=reset] {
+	background-color: #eee;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+
+[type=button]:hover,[type=reset]:hover {
+	background-color: #def;
+}
+
+#new-year-btn {
+	width: 15%;
+}
+
+.buttons-hor {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
+
+.builder-btn {
+	float: left;
+	margin: 2px;
+	flex-grow: 1;
+	max-width: 25%;
+}
+
+#html-container {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 100%;
+	min-height: 12em;
+	font-family: monospace;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+/*	word-break: break-all;*/
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(256,256,256,0.7);
+}
+
+.modal-content {
+	margin: 10% auto;
+	background-color: #fff;
+	padding: 20px;
+	padding-bottom: 10px;
+	border: 1px solid black;
+	width: 30%;
+	overflow: hidden;
+}
+
+.modal-content > form > label {
+	margin-top: 16px;
+	display: inline-block;
+}
+
+.modal-content > h3 {
+	margin: 0;
+	text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+textarea {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.modal-actions {
+	margin-top: 20px;
+	float: right;
+}
+
+.modal-actions > input {
+	margin: 2px;
+}
+
+#school-names-tab {
+	border: 1px solid black;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+th {
+	border: 1px solid black;
+	padding: 6px;
+	background-color: #eee;	
+}
+
+#schools-body > tr > td {
+	border: 1px solid black;
+	padding: 4px;
+}
+
+span.code {
+	font-family: monospace;
+}
+
+#footer {
+	text-align: center;
+	font-style: italic;
+	font-size: 10pt;
+	margin-top: 20px;
+}

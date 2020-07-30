@@ -1,0 +1,353 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>MOB Script Builder</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab">
+	
+	<script>
+		$(function() {
+			$('#header').load('header.html');
+			$('#footer').load('footer.html');
+		});
+	</script>
+</head>
+
+<body>
+	<div id="main-container" class="flex">
+		<div id="header"></div>
+		
+		<div style="text-align:center;">
+			<p><a href="index.html">Back to Builder</a></p>
+			<p>Jump to:&emsp;<a href="#html-tips">HTML Tips</a>&emsp;<a href="#school-names">School Names and Abbreviations</a></p>
+		</div>
+		
+		<div>
+			<h3>Instructions</h3>
+			<p><i>Step-by-step instructions to create a script on this site are listed below. If there are issues or bugs, contact person.</i></p>
+			<p>If you are creating a new year which does not have any scripts on the MOB site yet, click the "Add a new year button" and enter the year. This will generate the code for the link to the year at the top of the Scripts page as well as the container for the links to the scripts in that year. Copy the code snippets to their respective locations as directed.</p>
+			<ol>
+				<li>
+					<p><u>Create a show</u>. Enter the script ID in the format shown (school abbreviation then year). This ID will connect the show link to the show itself, and must be entered in this form before completing "7. Create link to show." Enter the full name of the opposing school (don't need to go overboard though). Mark if the game was home or away. Enter the stadium or venue name, then the city and state. Enter the date of the show. Mark whether the result of the game was a win, loss, or tie, and the final score.</p>
+					<p>If any of these fields are not applicable, for instance if we perform a <a href="http://mob.rice.edu/archives/scripts/#Monday_Night_Massacre">show at a non-sporting event</a>, leave the fields blank, and they will be left out of the code.</p>
+				</li>
+				<li>
+					<p><u>Begin a script</u>. Add the title of the show, if it has one. If the show has no title, leave the "Show Title" field blank, but still submit the form with the "Begin Script" button. This will add the title if there is one and create the table the script goes in. If the game you are recording has both a pregame and halftime that you wish to record, you can use this button again after "5. Finish script."</p>
+				</li>
+				<li>
+					<p><u>Add a line</u>. Specify the actor of the line&mdash;the announcer is saying something, the MOB is making a formation, etc. The "MOB" option is generally used to specify something the entire MOB says or does, as opposed to individual actions by SAs or formations. Leave blank if you want to add something only to the right side of the table. Under "What," enter whatever part of the script you are adding. Repeat as many times as necessary.</p>
+				</li>
+				<li>
+					<p><u>Add new show segment</u>. Use this button to add a horizontal line beneath the last line you added. This generally corresponds to the end of playing a song. Repeat as many times as necessary.</p>
+					<p>(4.5. <u>Add epilogue</u>). Sometimes a show might be noteworthy enough to merit an epilogue, which in the past has been used to discuss generally how the show went, any quirks, etc. Definitely optional. Do not add a new show segment before creating an epilogue. See <a href="http://mob.rice.edu/archives/scripts/#Tulane1989">Tulane 1989</a> for an example.</p>
+				</li>
+				<li>
+					<p><u>Finish script</u>. This button closes the table which contains the script. If another script follows the first, begin it after this button.</p>
+				</li>
+				<li>
+					<p><u>Finalize script</u>. This button closes off the entire section. Use after everything for the event has been added already.</p>
+				</li>
+				<li>
+					<p><u>Create link to show</u>. Enter the title to display in the link to the show. Enter the name of the school which is most commonly identified (see table <a href="">below</a> for common schools). Enter the abbreviated date as shown in the field. This link goes inside the code created by the "Add a new year button."</p>
+				</li>
+				<li>
+					<p>Copy all code created to their appropriate places in the MOB website code and publish. You're done!</p>
+				</li>
+			</ol>
+		</div>
+		
+		<div id="html-tips">
+			<h3>HTML Tips</h3>
+			<p>This tool is programmed in pretty basic JavaScript and doesn't have many advanced functionalities, like inserting various formatting options. These may be added in later updates, but for now it's probably easier to learn a few common HTML tools to help with formatting.</p>
+			<p>The biggest HTML concept you should know is called a "tag." These are the things which appear in pairs surrounding bits of text or code, such as <span class="code">&lt;div&gt;&lt;/div&gt;</span>. The tags operate on everything which is typed between them according to what kind of tags they are. For instance, using the underlining tag like this <span class="code">&lt;u&gt;Hello&lt;/u&gt;</span> will result in the text <u>Hello</u>.</p>
+			<p>Here are some common tags for formatting:</p>
+			<ul>
+				<li><span class="code">&lt;u&gt;&lt;/u&gt;</span>: <u>underline</u></li>
+				<li><span class="code">&lt;i&gt;&lt;/i&gt;</span>: <i>italics</i></li>
+				<li><span class="code">&lt;b&gt;&lt;/b&gt;</span>: <b>bold</b></li>
+				<li><span class="code">&lt;ul&gt;&lt;/ul&gt;</span>: Bullet points (like this list). Each bullet item should have the tags <span class="code">&lt;li&gt;&lt;/li&gt;</span> surrounding it</li>
+				<li><span class="code">&lt;ol&gt;&lt;/ol&gt;</span>: Numbered list (like the instructions list above). Also needs <span class="code">&lt;li&gt;&lt;/li&gt;</span> tags for each item</li>
+				<li><span class="code">&lt;p&gt;&lt;/p&gt;</span>: <p>Denotes a paragraph which is placed on its own line.</p><p>Consecutive paragraphs marked by this tag will have a small space between them</p></li>
+				<li><span class="code">&lt;br&gt;</span>: Line break. This tag does not come in a pair, and you just place it wherever you want the break to be.<br>No extra space<br>between lines here.</li>
+				<li><span class="code">&lt;img src="[image url]"/&gt;</span>: Image. Also does not come in a pair. See this <a href="https://www.w3schools.com/tags/tag_img.asp">link</a> for image formatting details</li>
+				<li><span class="code">&lt;a href="[url]"&gt;&lt;/a&gt;</span>: Link to the url specified. Text between these tags is what the link shows up as, like above</li>
+			</ul>
+			
+			<p>You may also need some character codes for characters not on a standard keyboard. These are created with a <span class="code">&amp;</span> and a <span class="code">;</span> with the code for the character in the middle. Here are some common character codes:</p>
+			<ul>
+				<li><span class="code">&amp;mdash;</span> an em-dash (&mdash;)</li>
+			</ul>
+			<p>These characters need to be replaced with their codes so HTML interprets them as text and not as a command:</p>
+			<ul>
+				<li><span class="code">&amp;amp;</span> &amp;</li>
+				<li><span class="code">&amp;lt;</span> &lt;</li>
+				<li><span class="code">&amp;gt;</span> &gt;</li>
+			</ul>
+		</div>
+		
+		<div id="school-names">
+			<h3>School Names and Abbreviations</h3>
+			<p>Here is a table of schools we have played before showing their full name, common name, and abbreviated ID name:</p>
+			
+			<table id="school-names-tab">
+				<thead id="schools-head">
+					<th width="40%">Full Name</th>
+					<th>Short Name</th>
+					<th>ID Name</th>
+				</thead>
+				<tbody id="schools-body">
+					<tr>
+						<td>Baylor University</td>
+						<td>Baylor</td>
+						<td>Baylor</td>
+					</tr>
+					<tr>
+						<td>California State University, Fresno</td>
+						<td>Fresno State</td>
+						<td>Fresno</td>
+					</tr>
+					<tr>
+						<td>Clemson University</td>
+						<td>Clemson</td>
+						<td>Clemson</td>
+					</tr>
+					<tr>
+						<td>East Carolina University</td>
+						<td>ECU</td>
+						<td>ECU</td>
+					</tr>
+					<tr>
+						<td>Florida Atlantic University</td>
+						<td>FAU</td>
+						<td>FAU</td>
+					</tr>
+					<tr>
+						<td>Florida International University</td>
+						<td>FIU</td>
+						<td>FIU</td>
+					</tr>
+					<tr>
+						<td>Indiana University</td>
+						<td>Indiana</td>
+						<td>IU</td>
+					</tr>
+					<tr>
+						<td>Lamar University</td>
+						<td>Lamar</td>
+						<td>Lamar</td>
+					</tr>
+					<tr>
+						<td>Louisiana State University</td>
+						<td>LSU</td>
+						<td>LSU</td>
+					</tr>
+					<tr>
+						<td>Louisiana Tech University</td>
+						<td>LA Tech</td>
+						<td>LATech</td>
+					</tr>
+					<tr>
+						<td>Marshall University</td>
+						<td>Marshall</td>
+						<td>Marshall</td>
+					</tr>
+					<tr>
+						<td>Nicholls State University</td>
+						<td>Nicholls State</td>
+						<td>Nicholls</td>
+					</tr>
+					<tr>
+						<td>Northwestern University</td>
+						<td>Northwestern</td>
+						<td>Northwestern</td>
+					</tr>
+					<tr>
+						<td>Old Dominion University</td>
+						<td>Old Dominion</td>
+						<td>ODU</td>
+					</tr>
+					<tr>
+						<td>Prairie View A&amp;M University</td>
+						<td>PVAMU</td>
+						<td>PVAMU</td>
+					</tr>
+					<tr>
+						<td>Purdue University</td>
+						<td>Purdue</td>
+						<td>Purdue</td>
+					</tr>
+					<tr>
+						<td>Sam Houston State University</td>
+						<td>Sam Houston State</td>
+						<td>SHSU</td>
+					</tr>
+					<tr>
+						<td>San Jose State University</td>
+						<td>San Jose State</td>
+						<td>SanJose</td>
+					</tr>
+					<tr>
+						<td>Southern Methodist University</td>
+						<td>SMU</td>
+						<td>SMU</td>
+					</tr>
+					<tr>
+						<td>Texas A&amp;M University</td>
+						<td>Texas A&amp;M</td>
+						<td>TAMU</td>
+					</tr>
+					<tr>
+						<td>Texas Christian University</td>
+						<td>TCU</td>
+						<td>TCU</td>
+					</tr>
+					<tr>
+						<td>Texas Tech University</td>
+						<td>TTU</td>
+						<td>TTU</td>
+					</tr>
+					<tr>
+						<td>Tulane University</td>
+						<td>Tulane</td>
+						<td>Tulane</td>
+					</tr>
+					<tr>
+						<td>United States Air Force Academy</td>
+						<td>Air Force</td>
+						<td>AirForce</td>
+					</tr>
+					<tr>
+						<td>United States Military Academy at West Point</td>
+						<td>Army</td>
+						<td>Army</td>
+					</tr>
+					<tr>
+						<td>United States Naval Academy</td>
+						<td>Navy</td>
+						<td>Navy</td>
+					</tr>
+					<tr>
+						<td>University of Alabama at Birmingham</td>
+						<td>UAB</td>
+						<td>UAB</td>
+					</tr>
+					<tr>
+						<td>Univeristy of Arkansas</td>
+						<td>Arkansas</td>
+						<td>Arkansas</td>
+					</tr>
+					<tr>
+						<td>University of Central Florida</td>
+						<td>UCF</td>
+						<td>UCF</td>
+					</tr>
+					<tr>
+						<td>University of Hawaii at Manoa</td>
+						<td>Hawaii</td>
+						<td>Hawaii</td>
+					</tr>
+					<tr>
+						<td>University of Houston</td>
+						<td>UH</td>
+						<td>UH</td>
+					</tr>
+					<tr>
+						<td>University of Louisiana at Lafayette<br>(formerly University of Southwestern Louisiana)</td>
+						<td>Louisiana</td>
+						<td>Louisiana</td>
+					</tr>
+					<tr>
+						<td>University of Memphis</td>
+						<td>Memphis</td>
+						<td>Memphis</td>
+					</tr>
+					<tr>
+						<td>University of Michigan</td>
+						<td>Michigan</td>
+						<td>Michigan</td>
+					</tr>
+					<tr>
+						<td>University of Nevada, Las Vegas</td>
+						<td>UNLV</td>
+						<td>UNLV</td>
+					</tr>
+					<tr>
+						<td>University of Nevada, Reno</td>
+						<td>Nevada</td>
+						<td>Nevada</td>
+					</tr>
+					<tr>
+						<td>University of North Texas</td>
+						<td>UNT</td>
+						<td>UNT</td>
+					</tr>
+					<tr>
+						<td>University of Notre Dame</td>
+						<td>Notre Dame</td>
+						<td>ND</td>
+					</tr>
+					<tr>
+						<td>University of Oklahoma</td>
+						<td>Oklahoma</td>
+						<td>OU</td>
+					</tr>
+					<tr>
+						<td>University of Southern California</td>
+						<td>USC</td>
+						<td>USC</td>
+					</tr>
+					<tr>
+						<td>University of Southern Mississippi</td>
+						<td>Southern Miss</td>
+						<td>SMiss</td>
+					</tr>
+					<tr>
+						<td>University of Texas at Austin</td>
+						<td>Texas</td>
+						<td>UT</td>
+					</tr>
+					<tr>
+						<td>University of Texas at El Paso</td>
+						<td>UTEP</td>
+						<td>UTEP</td>
+					</tr>
+					<tr>
+						<td>University of Texas at San Antonio</td>
+						<td>UTSA</td>
+						<td>UTSA</td>
+					</tr>
+					<tr>
+						<td>University of Tulsa</td>
+						<td>Tulsa</td>
+						<td>Tulsa</td>
+					</tr>
+					<tr>
+						<td>University of Utah</td>
+						<td>Utah</td>
+						<td>Utah</td>
+					</tr>
+					<tr>
+						<td>Vanderbilt University</td>
+						<td>Vanderbilt</td>
+						<td>Vandy</td>
+					</tr>
+					<tr>
+						<td>Wake Forest University</td>
+						<td>Wake Forest</td>
+						<td>Wake</td>
+					</tr>
+					<tr>
+						<td>Western Michigan University</td>
+						<td>Western Michigan</td>
+						<td>WMU</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<footer id="footer"></footer>
+	</div>
+</body>
+</html>

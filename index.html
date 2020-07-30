@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+	
+<!--TODO
+	add preview button
+	add copy script button
+-->
+
+<head>
+	<title>MOB Script Builder</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab">
+	
+	<script>
+		$(function() {
+			$('#header').load('header.html');
+			$('#footer').load('footer.html');
+		});
+	</script>
+</head>
+	
+<body>
+	<script src="builder.js"></script>
+	
+	<div id="main-container" class="flex">
+		<div id="header"></div>
+		<div id="page-description">
+			<p><i>The purpose of this page is to allow scripts to continue to be added to <a href="https://mob.rice.edu/archives/scripts/">mob.rice.edu</a> even if the webmagister is not familiar with HTML/CSS/JS. See the <a href="reference.html">reference page for instructions and help.</a></i></p>
+		</div>
+		<input id="new-year-btn" type="button" value="Add a new year" onclick="createNewYear();"><br>
+		<div class="buttons-hor">
+			<input class="builder-btn" type="button" value="1. Create a show" onclick="$('#show-builder-modal').show()">
+			<input class="builder-btn" type="button" value="2. Begin a script" onclick="$('#title-modal').show()">
+			<input class="builder-btn" type="button" value="3. Add a line" onclick="$('#line-modal').show()">
+			<input class="builder-btn" type="button" value="4. Add new show segment" onclick="newSegment();">
+			<input class="builder-btn" type="button" value="(4.5. Add epilogue)" onclick="$('#epilogue-modal').show()">
+			<input class="builder-btn" type="button" value="5. Finish script" onclick="closeTitle();">
+			<input class="builder-btn" type="button" value="6. Finalize script" onclick="finalize();">
+			<input class="builder-btn" type="button" value="7. Create link to show" onclick="$('#show-link-modal').show();">
+		</div>
+
+		<div id="html-container" contenteditable="true"></div>
+		
+		<div class="buttons-hor">
+			<input id="clear-all" type="button" value="Clear All" onclick="clearAll();">
+		</div>
+		
+		
+		<!--Modals-->
+
+		<div class="modal" id="show-builder-modal">
+			<div class="modal-content">
+				<h3>Create a Show:</h3>
+				<form>
+					<label for="script-id">Script ID:</label>
+					<input id="script-id" placeholder="TAMU1973"><br>
+					<label for="opponent">Opponent:</label>
+					<input id="opponent" placeholder="Texas A&M University"><br>
+					<label>Home or away game?</label>
+					<input type="radio" id="home" name="homeAway"><label for="home">Home</label>
+					<input type="radio" id="away" name="homeAway"><label for="away">Away</label><br>
+					<label for="stadium">Stadium:</label>
+					<input id="stadium" name="stadium" placeholder="Rice Stadium"><br>
+					<label for="location">Location:</label>
+					<input id="location" name="location" placeholder="Houston, TX"><br>
+					<label for="date">Date:</label>
+					<input id="date" name="date" placeholder="November 17, 1973"><br>
+					<label>Final score:</label>
+					<input type="radio" id="win" name="result" value="W"><label for="win">W</label>
+					<input type="radio" id="loss" name="result" value="L"><label for="loss">L</label>
+					<input type="radio" id="tie" name="result" value="T"><label for="tie">T</label>
+					<input type="number" id="score1" placeholder="24" style="width: 20px;"> - <input type="number" id="score2" placeholder="20" style="width: 20px;"><br>
+					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset"><input type="button" value="Create Show" onclick="createShow();"></div>
+				</form>
+			</div>
+		</div>
+
+		<div class="modal" id="title-modal">
+			<div class="modal-content">
+				<h3>Begin a Script:</h3>
+				<form>
+					<label for="title">Show title (or Pregame):</label>
+					<input id="title" placeholder="&quot;The Halftime of Infamy&quot;"><br>
+					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset"><input type="button" value="Begin Script" onclick="addTitle();"></div>
+				</form>
+			</div>
+		</div>
+
+		<div class="modal" id="line-modal">
+			<div class="modal-content">
+				<h3>Add a Line:</h3>
+				<form id="line-form">
+					<div>
+						<label>Who:</label><br>
+						<input type="radio" id="announcer" name="actor" value="Announcer"><label for="announcer">Announcer</label><br>
+						<input type="radio" id="formation" name="actor" value="Formation"><label for="formation">Formation</label><br>
+						<div style="margin-left:1.5em; display:flex;">
+							<input type="checkbox" id="spellout"><label for="spellout">Formation is a spellout <br>(e.g. <b>M O B</b>, <b>2 1</b>, etc.)</label><br>
+						</div>
+						<input type="radio" id="music" name="actor" value="Music"><label for="music">Music</label><br>
+						<input type="radio" id="action" name="actor" value="Action"><label for="action">Action</label><br>
+						<input type="radio" id="MOB" name="actor" value="MOB"><label for="MOB">MOB</label><br>
+						<input type="radio" id="other-actor" name="actor" value="other"><input id="other-field" placeholder="Other"><br>
+					</div>
+					<label for="what">What:</label><br>
+					<textarea id="what" rows="8" cols="50"></textarea>
+					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset"><input type="button" value="Add Line" onclick="addLine();"></div>
+				</form>
+			</div>
+		</div>
+
+		<div class="modal" id="epilogue-modal">
+			<div class="modal-content">
+				<h3>Add an Epilogue:</h3>
+				<form>
+					<label for="epilogue">Epilogue:</label>
+					<textarea id="epilogue" rows="8" cols="50" placeholder="(Optional) thoughts about the show..."></textarea>
+					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset"><input type="button" value="Add Epilogue" onclick="addEpilogue();"></div>
+				</form>
+			</div>
+		</div>
+
+		<div class="modal" id="show-link-modal">
+			<div class="modal-content">
+				<h3>Create a Link to the Show:</h3>
+				<form>
+					<label for="link-title">Title to appear in link. If show has no title, leave blank.</label>
+					<input id="link-title" placeholder="&quot;The Halftime of Infamy&quot;"><br>
+					<label for="opponent-short">Short opponent name. See other links for common abbreviations.</label>
+					<input id="opponent-short" placeholder="A&M"><br>
+					<label for="date-short">Date (abbreviated month)</label>
+					<input id="date-short" placeholder="Nov 17, 1973"><br>
+					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset"><input type="button" value="Create link" onclick="createShowLink();"></div>
+				</form>
+			</div>
+		</div>
+		
+		<footer id="footer"></footer>
+	</div>
+</body>
+</html>
