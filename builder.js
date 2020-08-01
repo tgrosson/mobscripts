@@ -133,7 +133,7 @@ function createShow() {
 		text2add += location;
 	}
 	if((hasLocation || hasStadium) && hasDate) {
-		text2add += '\n';
+		text2add += '<br>';
 	}
 	if(hasDate) {
 		text2add += date;
