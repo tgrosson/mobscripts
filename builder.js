@@ -1,39 +1,118 @@
 /* eslint-env es6 */
 "use strict";
 
-$(document).on('click', '.close', function() {
-	$(this).parents('.modal').hide()
+$.fn.resetFormat = function() {
+	$(this).prop('underlined',false);
+	$(this).prop('italicized',false);
+	$(this).prop('bolded',false);
+	return this;
+}
+
+$.fn.appendText = function(text2add) {
+	$(this).val(function() {
+		return $(this).val() + text2add;
+	})
+} 
+
+$( function() {
+	//Cancel buttons hide parent modal on click
+	$('.close').click(function() {
+		$(this).parents('.modal').hide();
+	})
+	
+	//Immediately set all formatting options to off
+	$(".formattable").resetFormat();
+	
+	//Pressing 'Enter' clicks the .submit button of the active modal
+	$(".modal-content").keydown(function(e) {
+		if(e.key === 'Enter') {
+			e.preventDefault();
+			$(this).find('.submit').click();
+		}
+	})
+	
+	//Creates <u></u> tags
+	$(".formattable").keydown(function(e) {
+		if(e.ctrlKey && e.key === 'u') {
+			e.preventDefault();
+			if(!$(this).prop("underlined")) {
+				$(this).appendText('<u>');
+				$(this).prop("underlined",true);
+			} else {
+				$(this).appendText('</u>');
+				$(this).prop("underlined",false);
+			}
+		}
+	});
+	
+	//Creates <i></i> tags
+	$(".formattable").keydown(function(e) {
+		if(e.ctrlKey && e.key === 'i') {
+			e.preventDefault();
+			if(!$(this).prop("italicized")) {
+				$(this).appendText('<i>');
+				$(this).prop("italicized",true);
+			} else {
+				$(this).appendText('</i>');
+				$(this).prop("italicized",false);
+			}
+		}
+	});
+	
+	//Creates <b></b> tags
+	$(".formattable").keydown(function(e) {
+		if(e.ctrlKey && e.key === 'b') {
+			e.preventDefault();
+			if(!$(this).prop("bolded")) {
+				$(this).appendText('<b>');
+				$(this).prop("bolded",true);
+			} else {
+				$(this).appendText('</b>');
+				$(this).prop("bolded",false);
+			}
+		}
+	});
+	
+	//Reset buttons also reset formatting of active modal
+	$('.modal-reset').click(function() {
+		$(this).parent().siblings('.formattable').resetFormat();
+	});
+	
+	//HTML reset buttons hide the html container
+	$('#code-containers').children('.hidden-code').on("reset",function() {
+		$(this).hide();
+	})
 });
+
+
 
 function createNewYear() {
 	var year = window.prompt('Enter a year');
 	
 	if(year.length > 0) {
-		var text2add = '<i>Add this line near the top of the page, with its similar lines:</i><br>';
-		text2add += '&lt;a href=\"#\" onclick=\"return show(\'' + year + '\',\'year\');\"&gt;' + year + '&lt;/a&gt;<br><br>';
+		var text2add = '<a href=\"#\" onclick=\"return show(\'' + year + '\',\'year\');\">' + year + '</a>\n\n';
 
-		text2add += '<i>Then add these lines to their appropriate place in the section immediately below:</i><br>';
-		text2add += '&lt;div class=\"year\" id=\"' + year + '\"&gt;<br>';
-		text2add += '\t&lt;table&gt;<br>';
-		text2add += '\t&lt;tbody&gt;&lt;tr&gt;<br>\t\t<br>';
-		text2add += '\t&lt;/tr&gt;<br>\t&lt;/tbody&gt;&lt;/table&gt;<br>&lt;/div&gt;<br>';
-
-		$('#html-container').append(text2add);
+		text2add += '<div class=\"year\" id=\"' + year + '\">\n';
+		text2add += '\t<table>\n';
+		text2add += '\t<tbody><tr>\n\t\t\n';
+		text2add += '\t</tr>\n\t</tbody></table>\n</div>';
+		
+		$('#new-year-container').show();
+		$('#new-year-html').appendText(text2add);
 	}
 }
 
 function createShow() {
-	var text2add = '<i>Add this code in its appropriate place in the large section of the page:</i><br>';
-	text2add += '&lt;div class=\"script\" id=\"' + $('#script-id').val() + '\"&gt;<br>';
+	var text2add = '<div class=\"script\" id=\"' + $('#script-id').val() + '\">\n';
 	
 	var oppon = $('#opponent').val();
 	var home = $('#home:checked').val();
 	var away = $('#away:checked').val();
 	
 	if(home) {
-		text2add += '\t&lt;h3&gt;' + oppon + ' vs. Rice' + '&lt;/h3&gt;<br>';
+		text2add += '\t<h3>' + oppon + ' vs. Rice' + '</h3>\n';
 	} else if (away) {
-		text2add += '\t&lt;h3&gt;' + 'Rice vs. ' + oppon + '&lt;/h3&gt;<br>';
+		text2add += '\t<h3>' + 'Rice vs. ' + oppon + '</h3>\n';
 	}
 	
 	var stadium = $('#stadium').val();
@@ -43,33 +122,33 @@ function createShow() {
 	var hasLocation = location.length > 0;
 	var hasDate = date.length > 0;
 	
-	text2add += '\t&lt;h5&gt;&lt;i&gt;'
+	text2add += '\t<h5><i>'
 	if(hasStadium) {
 		text2add += stadium;
 		if(hasLocation) {
-			text2add += ' &amp;mdash; ';
+			text2add += ' &mdash; ';
 		}
 	}
 	if(hasLocation) {
 		text2add += location;
 	}
 	if((hasLocation || hasStadium) && hasDate) {
-		text2add += '&lt;br&gt;';
+		text2add += '\n';
 	}
 	if(hasDate) {
 		text2add += date;
 	}
-	text2add += '&lt;/i&gt;&lt;/h5&gt;<br>';
+	text2add += '</i></h5>\n';
 	
 	var gameResult = $('[name="result"]:checked').val();
 	var score1 = $('#score1').val();
 	var score2 = $('#score2').val();
 	
 	if(gameResult) {
-		text2add += '\t&lt;p&gt;' + 'Result: ' + gameResult + ' ' + score1 + '&amp;mdash;' + score2 + '&lt;/p&gt;<br>'
+		text2add += '\t<p>' + 'Result: ' + gameResult + ' ' + score1 + '&mdash;' + score2 + '</p>\n'
 	}
 	
-	$('#html-container').append(text2add);
+	$('#script-html').appendText(text2add);
 	
 	$('#show-builder-modal').hide();
 }
@@ -79,18 +158,18 @@ function addTitle() {
 	var text2add = '';
 	
 	if(title.length > 0) {
-		text2add = '\t&lt;h4&gt;' + title + '&lt;/h4&gt;<br>';
+		text2add = '\t<h4>' + title + '</h4>\n';
 	}
 	
-	text2add += '\t&lt;table&gt;&lt;tbody&gt;<br>';
+	text2add += '\t<table><tbody>\n';
 	
-	$('#html-container').append(text2add);
+	$('#script-html').appendText(text2add);
 	
 	$('#title-modal').hide();
 }
 
 function addLine() {
-	var text2add = '\t&lt;tr&gt;<br>\t\t&lt;td class=\"left\"&gt;';
+	var text2add = '\t<tr>\n\t\t<td class=\"left\">';
 	
 	var actor = $('[name="actor"]:checked').val();
 	
@@ -102,67 +181,65 @@ function addLine() {
 			text2add += other + ':';
 		}
 	}
-	text2add += '&lt;/td&gt;<br>\t\t&lt;td&gt;';
+	text2add += '</td>\n\t\t<td>';
 	
 	var what = $('#what').val();
 	
 	if(actor==='Formation' && $('#spellout').is(':checked')) {
-		text2add += '&lt;b&gt;' + what + '&lt;/b&gt;';
+		text2add += '<b>' + what + '</b>';
 	} else if(actor === 'Music' || actor === 'Action' || actor === 'MOB') {
-		text2add += '&lt;i&gt;' + what + '&lt;/i&gt;';
+		text2add += '<i>' + what + '</i>';
 	} else {
 		text2add += what;
 	}
 	
-	text2add += '&lt;/td&gt;<br>\t&lt;/tr&gt;<br>';
-	
-	$('#html-container').append(text2add);
+	text2add += '</td>\n\t</tr>\n';
+
+	$('#script-html').appendText(text2add);
 	
 	$('#line-modal').hide();
 	$('#line-form').trigger('reset');
 }
 
 function newSegment() {
-	var scriptText = $('#html-container').html();
-	var loc = scriptText.lastIndexOf('&lt;tr');
-	var firstHalf = scriptText.substring(0,loc+6);
-	var secondHalf = scriptText.substring(loc+6);
+	var scriptText = $('#script-html').val();
+	var loc = scriptText.lastIndexOf('<tr');
+	var firstHalf = scriptText.substring(0,loc+3);
+	var secondHalf = scriptText.substring(loc+3);
 	
 	var newText = firstHalf + ' class=\"bot\"' + secondHalf;
-	$('#html-container').html(newText);
+	$('#script-html').val(newText);
 }
 
 function addEpilogue() {
 	var epilogue = $('#epilogue').val();
 	
-	var text2add = '\t&lt;tr class=\"epilogue\"&gt;<br>';
-	text2add += '\t\t&lt;td class=\"left\"&gt;Epilogue:&lt;/td&gt;<br>';
-	text2add += '\t\t&lt;td&gt;&lt;i&gt;' + epilogue + '&lt;/i&gt;&lt;/td&gt;<br>';
-	text2add += '\t&lt;/tr&gt;<br>';
+	var text2add = '\t<tr class=\"epilogue\">\n';
+	text2add += '\t\t<td class=\"left\">Epilogue:</td>\n';
+	text2add += '\t\t<td><i>' + epilogue + '</i></td>\n';
+	text2add += '\t</tr>\n';
 	
-	$('#html-container').append(text2add);
+	$('#script-html').appendText(text2add);
 	
 	$('#epilogue-modal').hide();
 }
 
 function closeTitle() {
-	$('#html-container').append('\t&lt;/tbody&gt;&lt;/table&gt;<br>');
+	$('#script-html').appendText('\t</tbody></table>\n');
 }
 
 function finalize() {
-	$('#html-container').append('&lt;/div&gt;<br>');
+	$('#script-html').appendText('</div>\n');
 }
 
 function createShowLink() {
-	var text2add = '<i>Place this line between the &lt;tr&gt;&lt;/tr&gt; tags in the appropriate year. If there are already three links between these tags, add another &lt;tr&gt;&lt;/tr&gt; pair directly after the first, and add this line between the new tags.</i><br>';
-	
-	text2add += '&lt;td class=\"title\"&gt;&lt;a href=\"#\" onclick=\"return show(\'' + $('#script-id').val() + '\',\'script\');\"&gt;';
+	var text2add = '<td class=\"title\"><a href=\"#\" onclick=\"return show(\'' + $('#script-id').val() + '\',\'script\');\">';
 	
 	var title = $('#link-title').val();
 	var oppon = $('#opponent-short').val();
 	
 	if(title.length > 0) {
-		text2add += title + '&lt;/a&gt;&lt;br&gt;';
+		text2add += title + '</a><br>';
 	}
 	if($('#away:checked').val()) {
 		text2add += '@ ';
@@ -172,16 +249,21 @@ function createShowLink() {
 	}
 	text2add += $('#date-short').val();
 	if(title.length === 0) {
-		text2add += '&lt;/a&gt;';
+		text2add += '</a>';
 	}
-	text2add += '&lt;/td&gt;<br><br>';
+	text2add += '</td>';
 	
-	$('#html-container').prepend(text2add);
+	$('#script-link-container').show();
+	$('#script-link-html').appendText(text2add);
 	
 	$('#show-link-modal').hide();
 }
 
+function previewScript() {
+	$('#script-preview').contents().find('#preview-container').html($('#script-html').val());
+}
+
 function clearAll() {
-	$('#html-container').empty();
 	$('form').trigger('reset');
+	$(".formattable").resetFormat();
 }

@@ -2,8 +2,7 @@
 <html>
 	
 <!--TODO
-	add preview button
-	add copy script button
+	add undo
 -->
 
 <head>
@@ -39,11 +38,33 @@
 			<input class="builder-btn" type="button" value="6. Finalize script" onclick="finalize();">
 			<input class="builder-btn" type="button" value="7. Create link to show" onclick="$('#show-link-modal').show();">
 		</div>
-
-		<div id="html-container" contenteditable="true"></div>
+		
+		<div id="code-containers">
+			<form id="new-year-container" class="hidden-code">
+				<label for="new-year-html"><i>Add the first line near the top of the page, with its similar lines.<br>Then add the remaining lines to their appropriate place in the section immediately below.</i></label>
+				<textarea id="new-year-html"></textarea>
+				<input type="reset" class="html-reset" value="Clear">
+			</form>
+			<form id="script-link-container" class="hidden-code">
+				<label for="script-link-html"><i>Place this line between the <code>&lt;tr&gt;&lt;/tr&gt;</code> tags in the appropriate year. If there are already three links between these tags, add another <code>&lt;tr&gt;&lt;/tr&gt;</code> pair directly after the first, and add this line between the new tags.</i></label>
+				<textarea id="script-link-html"></textarea>
+				<input type="reset" class="html-reset" value="Clear">
+			</form>
+			<form id="script-container">
+				<label for="script-html"><i>Add this code in its appropriate place in the large section of the page:</i></label>
+				<textarea id="script-html"></textarea>
+			</form>
+		</div>
 		
 		<div class="buttons-hor">
+			<input id="preview-script" type="button" value="Preview Script" onclick="previewScript();">
 			<input id="clear-all" type="button" value="Clear All" onclick="clearAll();">
+		</div>
+		
+		<div id="preview-container">
+			<i>This is how the above HTML would appear on the MOB website's 2020 design:</i>
+			<hr><hr>
+			<iframe id="script-preview" src="preview.html"></iframe>
 		</div>
 		
 		
@@ -71,7 +92,7 @@
 					<input type="radio" id="loss" name="result" value="L"><label for="loss">L</label>
 					<input type="radio" id="tie" name="result" value="T"><label for="tie">T</label>
 					<input type="number" id="score1" placeholder="24" style="width: 20px;"> - <input type="number" id="score2" placeholder="20" style="width: 20px;"><br>
-					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset"><input type="button" value="Create Show" onclick="createShow();"></div>
+					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset" class="modal-reset"><input type="button" class="submit" value="Create Show" onclick="createShow();"></div>
 				</form>
 			</div>
 		</div>
@@ -81,8 +102,8 @@
 				<h3>Begin a Script:</h3>
 				<form>
 					<label for="title">Show title (or Pregame):</label>
-					<input id="title" placeholder="&quot;The Halftime of Infamy&quot;"><br>
-					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset"><input type="button" value="Begin Script" onclick="addTitle();"></div>
+					<input class="formattable" id="title" placeholder="&quot;The Halftime of Infamy&quot;"><br>
+					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset" class="modal-reset"><input type="button" class="submit" value="Begin Script" onclick="addTitle();"></div>
 				</form>
 			</div>
 		</div>
@@ -101,11 +122,11 @@
 						<input type="radio" id="music" name="actor" value="Music"><label for="music">Music</label><br>
 						<input type="radio" id="action" name="actor" value="Action"><label for="action">Action</label><br>
 						<input type="radio" id="MOB" name="actor" value="MOB"><label for="MOB">MOB</label><br>
-						<input type="radio" id="other-actor" name="actor" value="other"><input id="other-field" placeholder="Other"><br>
+						<input type="radio" id="other-actor" name="actor" value="other"><input class="formattable" id="other-field" placeholder="Other"><br>
 					</div>
 					<label for="what">What:</label><br>
-					<textarea id="what" rows="8" cols="50"></textarea>
-					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset"><input type="button" value="Add Line" onclick="addLine();"></div>
+					<textarea class="formattable" id="what" rows="8" cols="50"></textarea>
+					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset" class="modal-reset"><input type="button" class="submit" value="Add Line" onclick="addLine();"></div>
 				</form>
 			</div>
 		</div>
@@ -115,8 +136,8 @@
 				<h3>Add an Epilogue:</h3>
 				<form>
 					<label for="epilogue">Epilogue:</label>
-					<textarea id="epilogue" rows="8" cols="50" placeholder="(Optional) thoughts about the show..."></textarea>
-					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset"><input type="button" value="Add Epilogue" onclick="addEpilogue();"></div>
+					<textarea class="formattable" id="epilogue" rows="8" cols="50" placeholder="(Optional) thoughts about the show..."></textarea>
+					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset" class="modal-reset"><input type="button" class="submit" value="Add Epilogue" onclick="addEpilogue();"></div>
 				</form>
 			</div>
 		</div>
@@ -126,12 +147,12 @@
 				<h3>Create a Link to the Show:</h3>
 				<form>
 					<label for="link-title">Title to appear in link. If show has no title, leave blank.</label>
-					<input id="link-title" placeholder="&quot;The Halftime of Infamy&quot;"><br>
+					<input class="formattable" id="link-title" placeholder="&quot;The Halftime of Infamy&quot;"><br>
 					<label for="opponent-short">Short opponent name. See other links for common abbreviations.</label>
 					<input id="opponent-short" placeholder="A&M"><br>
 					<label for="date-short">Date (abbreviated month)</label>
 					<input id="date-short" placeholder="Nov 17, 1973"><br>
-					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset"><input type="button" value="Create link" onclick="createShowLink();"></div>
+					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset" class="modal-reset"><input type="button" class="submit" value="Create link" onclick="createShowLink();"></div>
 				</form>
 			</div>
 		</div>

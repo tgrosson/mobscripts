@@ -50,7 +50,7 @@
 					<p><u>Finalize script</u>. This button closes off the entire section. Use after everything for the event has been added already.</p>
 				</li>
 				<li>
-					<p><u>Create link to show</u>. Enter the title to display in the link to the show. Enter the name of the school which is most commonly identified (see table <a href="">below</a> for common schools). Enter the abbreviated date as shown in the field. This link goes inside the code created by the "Add a new year button."</p>
+					<p><u>Create link to show</u>. Enter the title to display in the link to the show. Enter the name of the school which is most commonly identified (see table <a href="#school-names">below</a> for common schools). Enter the abbreviated date as shown in the field. This link goes inside the code created by the "Add a new year button."</p>
 				</li>
 				<li>
 					<p>Copy all code created to their appropriate places in the MOB website code and publish. You're done!</p>
@@ -60,30 +60,30 @@
 		
 		<div id="html-tips">
 			<h3>HTML Tips</h3>
-			<p>This tool is programmed in pretty basic JavaScript and doesn't have many advanced functionalities, like inserting various formatting options. These may be added in later updates, but for now it's probably easier to learn a few common HTML tools to help with formatting.</p>
-			<p>The biggest HTML concept you should know is called a "tag." These are the things which appear in pairs surrounding bits of text or code, such as <span class="code">&lt;div&gt;&lt;/div&gt;</span>. The tags operate on everything which is typed between them according to what kind of tags they are. For instance, using the underlining tag like this <span class="code">&lt;u&gt;Hello&lt;/u&gt;</span> will result in the text <u>Hello</u>.</p>
+			<p>This tool is programmed in pretty basic JavaScript and doesn't have many advanced functionalities. Some formatting keyboard shortcuts are available, but it's probably useful to learn a few common HTML tools to help with formatting.</p>
+			<p>The biggest HTML concept you should know is called a "tag." These are the things which appear in pairs surrounding bits of text or code, such as <code>&lt;div&gt;&lt;/div&gt;</code>. The tags operate on everything which is typed between them according to what kind of tags they are. For instance, using the underlining tag like this <code>&lt;u&gt;Hello&lt;/u&gt;</code> will result in the text <u>Hello</u>.</p>
 			<p>Here are some common tags for formatting:</p>
 			<ul>
-				<li><span class="code">&lt;u&gt;&lt;/u&gt;</span>: <u>underline</u></li>
-				<li><span class="code">&lt;i&gt;&lt;/i&gt;</span>: <i>italics</i></li>
-				<li><span class="code">&lt;b&gt;&lt;/b&gt;</span>: <b>bold</b></li>
-				<li><span class="code">&lt;ul&gt;&lt;/ul&gt;</span>: Bullet points (like this list). Each bullet item should have the tags <span class="code">&lt;li&gt;&lt;/li&gt;</span> surrounding it</li>
-				<li><span class="code">&lt;ol&gt;&lt;/ol&gt;</span>: Numbered list (like the instructions list above). Also needs <span class="code">&lt;li&gt;&lt;/li&gt;</span> tags for each item</li>
-				<li><span class="code">&lt;p&gt;&lt;/p&gt;</span>: <p>Denotes a paragraph which is placed on its own line.</p><p>Consecutive paragraphs marked by this tag will have a small space between them</p></li>
-				<li><span class="code">&lt;br&gt;</span>: Line break. This tag does not come in a pair, and you just place it wherever you want the break to be.<br>No extra space<br>between lines here.</li>
-				<li><span class="code">&lt;img src="[image url]"/&gt;</span>: Image. Also does not come in a pair. See this <a href="https://www.w3schools.com/tags/tag_img.asp">link</a> for image formatting details</li>
-				<li><span class="code">&lt;a href="[url]"&gt;&lt;/a&gt;</span>: Link to the url specified. Text between these tags is what the link shows up as, like above</li>
+				<li><code>&lt;u&gt;&lt;/u&gt;</code>: <u>underline</u>. You can open or close this tag with <code>Ctrl + u</code> while editing certain boxes.</li>
+				<li><code>&lt;i&gt;&lt;/i&gt;</code>: <i>italics</i>. You can open or close this tag with <code>Ctrl + i</code>.</li>
+				<li><code>&lt;b&gt;&lt;/b&gt;</code>: <b>bold</b>. You can open or close this tag with <code>Ctrl + b</code>.</li>
+				<li><code>&lt;ul&gt;&lt;/ul&gt;</code>: Bullet points (like this list). Each bullet item should have the tags <code>&lt;li&gt;&lt;/li&gt;</code> surrounding it</li>
+				<li><code>&lt;ol&gt;&lt;/ol&gt;</code>: Numbered list (like the instructions list above). Also needs <code>&lt;li&gt;&lt;/li&gt;</code> tags for each item</li>
+				<li><code>&lt;p&gt;&lt;/p&gt;</code>: <p>Denotes a paragraph which is placed on its own line.</p><p>Consecutive paragraphs marked by this tag will have a small space between them</p></li>
+				<li><code>&lt;br&gt;</code>: Line break. This tag does not come in a pair, and you just place it wherever you want the break to be.<br>No extra space<br>between lines here.</li>
+				<li><code>&lt;img src="[image url]"/&gt;</code>: Image. Also does not come in a pair. See this <a href="https://www.w3schools.com/tags/tag_img.asp">link</a> for image formatting details</li>
+				<li><code>&lt;a href="[url]"&gt;&lt;/a&gt;</code>: Link to the url specified. Text between these tags is what the link shows up as, like above</li>
 			</ul>
 			
-			<p>You may also need some character codes for characters not on a standard keyboard. These are created with a <span class="code">&amp;</span> and a <span class="code">;</span> with the code for the character in the middle. Here are some common character codes:</p>
+			<p>You may also need some character codes for characters not on a standard keyboard. These are created with a <code>&amp;</code> and a <code>;</code> with the code for the character in the middle. Here are some common character codes:</p>
 			<ul>
-				<li><span class="code">&amp;mdash;</span> an em-dash (&mdash;)</li>
+				<li><code>&amp;mdash;</code> an em-dash (&mdash;)</li>
 			</ul>
 			<p>These characters need to be replaced with their codes so HTML interprets them as text and not as a command:</p>
 			<ul>
-				<li><span class="code">&amp;amp;</span> &amp;</li>
-				<li><span class="code">&amp;lt;</span> &lt;</li>
-				<li><span class="code">&amp;gt;</span> &gt;</li>
+				<li><code>&amp;amp;</code> &amp;</li>
+				<li><code>&amp;lt;</code> &lt;</li>
+				<li><code>&amp;gt;</code> &gt;</li>
 			</ul>
 		</div>
 		
