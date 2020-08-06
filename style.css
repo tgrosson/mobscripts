@@ -73,6 +73,7 @@ div.flex {
 	float: left;
 	flex-grow: 1;
 	max-width: 25%;
+	min-width: min-content;
 }
 
 #code-containers > form > label {
@@ -122,6 +123,7 @@ div.flex {
 	padding-bottom: 10px;
 	border: 1px solid black;
 	width: 30%;
+	min-width: 350px;;
 	overflow: hidden;
 }
 

@@ -12,6 +12,9 @@ $.fn.appendText = function(text2add) {
 	$(this).val(function() {
 		return $(this).val() + text2add;
 	})
+	
+	//Scroll script area to bottom on update
+	$(this).scrollTop($(this)[0].scrollHeight);
 } 
 
 $( function() {
@@ -81,9 +84,8 @@ $( function() {
 	//HTML reset buttons hide the html container
 	$('#code-containers').children('.hidden-code').on("reset",function() {
 		$(this).hide();
-	})
+	});
 });
-
 
 
 function createNewYear() {
