@@ -1,11 +1,17 @@
 /* eslint-env es6 */
 "use strict";
 
-$.fn.resetFormat = function() {
-	$(this).prop('underlined',false);
-	$(this).prop('italicized',false);
-	$(this).prop('bolded',false);
-	return this;
+$.fn.isFormatted = function(tag) {
+	var cursorLoc = $(this).prop('selectionStart')
+	var prevText = $(this).val().substr(0,cursorLoc)
+	
+	var lastOpen = prevText.lastIndexOf('<'+tag+'>');
+	var lastClose = prevText.lastIndexOf('</'+tag+'>');
+	if(lastOpen>lastClose) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 $.fn.appendText = function(text2add) {
@@ -17,6 +23,24 @@ $.fn.appendText = function(text2add) {
 	$(this).scrollTop($(this)[0].scrollHeight);
 } 
 
+$.fn.insertText = function(text2ins) {
+	var cursorLoc = $(this).prop('selectionStart');
+	var text = $(this).val();
+	var front = text.substr(0,cursorLoc);
+	var back = text.substr(cursorLoc);
+	
+	$(this).val(front+text2ins+back);
+	
+	//Keep cursor where it was
+	var pos = cursorLoc + text2ins.length;
+	$(this)[0].setSelectionRange(pos,pos);
+//	var range = $(this).createTextRange();
+//	range.collapse(true);
+//	range.moveEnd('character', pos);
+//	range.moveStart('character', pos);
+//	range.select();
+}
+
 $( function() {
 	//Cancel buttons hide parent modal on click
 	$('.close').click(function() {
@@ -24,7 +48,7 @@ $( function() {
 	})
 	
 	//Immediately set all formatting options to off
-	$(".formattable").resetFormat();
+//	$(".formattable").resetFormat();
 	
 	//Pressing 'Enter' clicks the .submit button of the active modal
 	$(".modal-content").keydown(function(e) {
@@ -38,12 +62,10 @@ $( function() {
 	$(".formattable").keydown(function(e) {
 		if(e.ctrlKey && e.key === 'u') {
 			e.preventDefault();
-			if(!$(this).prop("underlined")) {
-				$(this).appendText('<u>');
-				$(this).prop("underlined",true);
+			if($(this).isFormatted('u')) {
+				$(this).insertText('</u>');
 			} else {
-				$(this).appendText('</u>');
-				$(this).prop("underlined",false);
+				$(this).insertText('<u>');
 			}
 		}
 	});
@@ -52,12 +74,10 @@ $( function() {
 	$(".formattable").keydown(function(e) {
 		if(e.ctrlKey && e.key === 'i') {
 			e.preventDefault();
-			if(!$(this).prop("italicized")) {
-				$(this).appendText('<i>');
-				$(this).prop("italicized",true);
-			} else {
+			if($(this).isFormatted('i')) {
 				$(this).appendText('</i>');
-				$(this).prop("italicized",false);
+			} else {
+				$(this).appendText('<i>');
 			}
 		}
 	});
@@ -66,20 +86,14 @@ $( function() {
 	$(".formattable").keydown(function(e) {
 		if(e.ctrlKey && e.key === 'b') {
 			e.preventDefault();
-			if(!$(this).prop("bolded")) {
-				$(this).appendText('<b>');
-				$(this).prop("bolded",true);
-			} else {
+			if($(this).isFormatted('b')) {
 				$(this).appendText('</b>');
-				$(this).prop("bolded",false);
+			} else {
+				$(this).appendText('<b>');
 			}
 		}
 	});
 	
-	//Reset buttons also reset formatting of active modal
-	$('.modal-reset').click(function() {
-		$(this).parent().siblings('.formattable').resetFormat();
-	});
 	
 	//HTML reset buttons hide the html container
 	$('#code-containers').children('.hidden-code').on("reset",function() {
@@ -267,5 +281,4 @@ function previewScript() {
 
 function clearAll() {
 	$('form').trigger('reset');
-	$(".formattable").resetFormat();
 }
