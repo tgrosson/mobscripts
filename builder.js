@@ -34,11 +34,6 @@ $.fn.insertText = function(text2ins) {
 	//Keep cursor where it was
 	var pos = cursorLoc + text2ins.length;
 	$(this)[0].setSelectionRange(pos,pos);
-//	var range = $(this).createTextRange();
-//	range.collapse(true);
-//	range.moveEnd('character', pos);
-//	range.moveStart('character', pos);
-//	range.select();
 }
 
 $( function() {
