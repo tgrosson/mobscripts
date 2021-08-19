@@ -217,6 +217,32 @@ function addLine() {
 	$('#line-form').trigger('reset');
 }
 
+function addImage() {
+	var text2add = '\t<tr>\n\t\t<td ';
+	
+	var imtype = $('[name="imtype"]:checked').val();
+	var imlink = $('#imlink').val();
+	
+	if (imtype=="Specific") {
+		text2add += 'class=\"left\">';
+		var imlabel = $('#imlabel').val();
+		if (imlabel.length > 0) {
+			text2add += imlabel + ':';
+		}
+		text2add += '</td>\n\t\t<td style=\"text-align:center;\">';
+	} else {
+		text2add += 'style=\"text-align:center;\" colspan=\"2\">';
+	}
+	
+	text2add += '<img src=\"' + imlink + '\" class=\"responsive\" />';
+	text2add += '</td>\n\t</tr>\n';
+	
+	$('#script-html').appendText(text2add);
+	
+	$('#img-modal').hide();
+	$('#img-form').trigger('reset');
+}
+
 function newSegment() {
 	var scriptText = $('#script-html').val();
 	var loc = scriptText.lastIndexOf('<tr');

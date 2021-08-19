@@ -38,7 +38,7 @@
 			<input class="builder-btn" type="button" value="5. Finish script" onclick="closeTitle();">
 			<input class="builder-btn" type="button" value="6. Finalize script" onclick="finalize();">
 			<input class="builder-btn" type="button" value="7. Create link to show" onclick="$('#show-link-modal').show();">
-		</div>
+		</div><br>
 		
 		<div id="code-containers">
 			<form id="new-year-container" class="hidden-code">
@@ -125,9 +125,29 @@
 						<input type="radio" id="MOB" name="actor" value="MOB"><label for="MOB">MOB</label><br>
 						<input type="radio" id="other-actor" name="actor" value="other"><input class="formattable" id="other-field" placeholder="Other"><br>
 					</div>
+					<div style="margin:10px 0 2px; 0;">
+						<input class="builder-btn" type="button" value="Add image" onclick="$('#img-modal').show(); $('#line-modal').hide()"><br>
+					</div>
 					<label for="what">What:</label><br>
 					<textarea class="formattable" id="what" rows="8" cols="50"></textarea>
 					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset" class="modal-reset"><input type="button" class="submit" value="Add Line" onclick="addLine();"></div>
+				</form>
+			</div>
+		</div>
+		
+		<div class="modal" id="img-modal">
+			<div class="modal-content">
+				<h3>Add an Image:</h3>
+				<form id="img-form">
+					<input type="radio" id="general" name="imtype" value="General"><label for="general">On its own line</label><br>
+					<input type="radio" id="specific" name="imtype" value="Specific"><label for="specific">With a label:</label>
+					<div style="margin:2px 0 0 1.5em; display:flex;">
+						<input class="formattable" id="imlabel" placeholder="e.g. Videoboard">
+					</div>
+					<label for="imlink">Link to the image:</label><br>
+					<input id="imlink" placeholder="https://wherever.url" style="width:90%;">
+					<p style="font-size: smaller;"><i>By default, the image is centered at 50% width on desktop and 100% width on mobile. Sometime I'll add the ability to customize that...</i></p>
+					<div class="modal-actions"><input type="button" class="close" value="Cancel"><input type="reset" class="modal-reset"><input type="button" class="submit" value="Add image" onclick="addImage();"></div>
 				</form>
 			</div>
 		</div>
